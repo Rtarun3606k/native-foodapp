@@ -22,7 +22,7 @@ const _layout = () => {
             resizeMode="stretch"
           />
         </View>
-        <Text className="text-center text-2xl font-bold text-black">
+        <Text className="text-center text-2xl font-space-bold text-black">
           Welcome to Our App
         </Text>
       </ScrollView>

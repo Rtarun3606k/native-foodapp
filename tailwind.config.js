@@ -8,7 +8,34 @@ module.exports = {
   ],
   presets: [require("nativewind/preset")],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        // Playfair Display
+        playfair: ["PlayfairDisplay-Regular"],
+        "playfair-bold": ["PlayfairDisplay-Bold"],
+        "playfair-medium": ["PlayfairDisplay-Medium"],
+        "playfair-semibold": ["PlayfairDisplay-SemiBold"],
+
+        // Poppins
+        poppins: ["Poppins-Regular"],
+        "poppins-bold": ["Poppins-Bold"],
+        "poppins-medium": ["Poppins-Medium"],
+        "poppins-semibold": ["Poppins-SemiBold"],
+        "poppins-light": ["Poppins-Light"],
+
+        // Space Grotesk
+        space: ["SpaceGrotesk-Regular"],
+        "space-bold": ["SpaceGrotesk-Bold"],
+        "space-medium": ["SpaceGrotesk-Medium"],
+        "space-semibold": ["SpaceGrotesk-SemiBold"],
+
+        // Tagesschrift
+        tagesschrift: ["Tagesschrift-Regular"],
+
+        // Space Mono
+        mono: ["SpaceMono-Regular"],
+      },
+    },
   },
   plugins: [],
 };
