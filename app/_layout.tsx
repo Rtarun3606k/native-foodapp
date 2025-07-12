@@ -1,29 +1,51 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import { Stack } from "expo-router";
+import { useFonts } from "expo-font";
+import { useEffect } from "react";
+import * as SplashScreen from "expo-splash-screen";
+import "../global.css";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+// Prevent the splash screen from auto-hiding before asset loading is complete
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+  const [fontsLoaded] = useFonts({
+    // Playfair Display fonts
+    'PlayfairDisplay-Regular': require('../assets/fonts/Playfair_Display/static/PlayfairDisplay-Regular.ttf'),
+    'PlayfairDisplay-Bold': require('../assets/fonts/Playfair_Display/static/PlayfairDisplay-Bold.ttf'),
+    'PlayfairDisplay-Medium': require('../assets/fonts/Playfair_Display/static/PlayfairDisplay-Medium.ttf'),
+    'PlayfairDisplay-SemiBold': require('../assets/fonts/Playfair_Display/static/PlayfairDisplay-SemiBold.ttf'),
+    
+    // Poppins fonts
+    'Poppins-Regular': require('../assets/fonts/Poppins/Poppins-Regular.ttf'),
+    'Poppins-Bold': require('../assets/fonts/Poppins/Poppins-Bold.ttf'),
+    'Poppins-Medium': require('../assets/fonts/Poppins/Poppins-Medium.ttf'),
+    'Poppins-SemiBold': require('../assets/fonts/Poppins/Poppins-SemiBold.ttf'),
+    'Poppins-Light': require('../assets/fonts/Poppins/Poppins-Light.ttf'),
+    
+    // Space Grotesk fonts
+    'SpaceGrotesk-Regular': require('../assets/fonts/Space_Grotesk/static/SpaceGrotesk-Regular.ttf'),
+    'SpaceGrotesk-Bold': require('../assets/fonts/Space_Grotesk/static/SpaceGrotesk-Bold.ttf'),
+    'SpaceGrotesk-Medium': require('../assets/fonts/Space_Grotesk/static/SpaceGrotesk-Medium.ttf'),
+    'SpaceGrotesk-SemiBold': require('../assets/fonts/Space_Grotesk/static/SpaceGrotesk-SemiBold.ttf'),
+    
+    // Tagesschrift
+    'Tagesschrift-Regular': require('../assets/fonts/Tagesschrift/Tagesschrift-Regular.ttf'),
+    
+    // Space Mono
+    'SpaceMono-Regular': require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
-  if (!loaded) {
-    // Async font loading only occurs in development.
+  useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
     return null;
   }
 
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+  return <Stack screenOptions={{
+    headerShown: false,
+  }} />;
 }
